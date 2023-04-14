@@ -3,6 +3,18 @@ import React, { useState, useEffect } from "react";
 const URL_BASE = 'http://localhost:8080';
 const api_url = "http://localhost:8080/books";
 
+function onClickDelete(bookcode) {
+  var notification = 'Do you want to remove this?';
+  if (window.confirm(notification)) {
+    fetch(URL_BASE + `/book/delete/${bookcode}`)
+      .then((response) => response.json())
+      .then((data) => {
+        alert(data ? 'Delete successfully' : 'Can\'t delete');
+        window.location.href='/books'; 
+      });
+  } else return false;
+}
+
 const Books = () => {
 
   const [posts, setPosts] = useState([]);
@@ -19,12 +31,12 @@ const Books = () => {
   }, []);
 
   return (
-    <><div class="container">
-      <div class="row">
+    <><div className="container">
+      <div className="row">
         <h1>List Book</h1>
       </div>
-    </div><table class="table table-striped table-bordered">
-        <thead class="table-dark">
+    </div><table className="table table-striped table-bordered">
+        <thead className="table-dark">
           <tr>
             <th>BookCode</th>
             <th>Title</th>
@@ -37,21 +49,25 @@ const Books = () => {
         <tbody id="book-rows">
           {posts.map((book) => {
             return (
-              <tr>
+              <tr key={book.bookcode}>
                 <td>{book.bookcode}</td>
                 <td>{book.title}</td>
                 <td>{book.author}</td>
                 <td>{book.category}</td>
-                <td>{book.approved ? <input type="checkbox" checked /> : <input type="checkbox" />} </td>
+                <td>{book.approved ? <input type="checkbox" defaultChecked disabled/> : <input type="checkbox" disabled/>} </td>
                 <td className="d-flex justify-content-around">
-                  <a href= {`book/${book.bookcode}`} class="btn btn-success">View</a>
-                  <a href= '/books' class="btn btn-danger" onClick={() => fetch(URL_BASE + `/book/delete/${book.bookcode}`)} >Delete</a>
+                  <a href={`book/${book.bookcode}`} className="btn btn-success">View</a>
+                  <button className="btn btn-danger" onClick={() => onClickDelete(book.bookcode)} >Delete</button>
                 </td>
               </tr>
             );
           })}
         </tbody>
-      </table></>
+      </table>
+      <div className="text-center">
+        <a href= 'book/-1' className="btn btn-primary">New Book</a>
+      </div>
+    </>
   );
 };
 
