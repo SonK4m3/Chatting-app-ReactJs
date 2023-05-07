@@ -1,6 +1,10 @@
-package models;
+package model;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
 public class Book {
+	@Id
 	int bookcode;
 	String title;
 	String author;
@@ -10,9 +14,9 @@ public class Book {
 	
 	public Book() {
 		this.bookcode = -1;
-		this.title = "title";
-		this.author = "author";
-		this.category = "category";
+		this.title = "";
+		this.author = "";
+		this.category = "";
 		this.approved = false;
 	}
 	
