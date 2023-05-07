@@ -37,6 +37,10 @@ const Pets = () => {
       <div className="row">
         <h1>List Pets</h1>
       </div>
+    <div>
+      <input placeholder="Enter pet name" />
+    </div>
+
     </div><table className="table table-striped table-bordered">
         <thead className="table-dark">
           <tr>

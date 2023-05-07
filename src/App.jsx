@@ -7,6 +7,8 @@ import Pets from "./components/Pets";
 import PhotoPage from "./pages/PhotoPage";
 import Books from "./components/Books";
 import BookDetail from "./pages/BookDetail";
+import Students from "./components/Students";
+import StudentDetail from "./pages/StudentDetail";
 
 function App() {
   return (
@@ -20,6 +22,10 @@ function App() {
           <Route path="books" element={<Books />} />
           <Route path="book/:id" element={<BookDetail />} />
           <Route path="error" element={<Error />} />
+
+
+          <Route path="students" element={<Students />} />
+          <Route path="student/:id" element={<StudentDetail />} />
         </Routes>
       </BrowserRouter>
     </div>
